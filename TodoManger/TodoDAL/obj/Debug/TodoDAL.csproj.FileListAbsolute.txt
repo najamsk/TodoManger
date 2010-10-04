@@ -1,0 +1,6 @@
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoDAL\bin\Debug\TodoDAL.dll.config
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoDAL\bin\Debug\TodoDAL.dll
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoDAL\bin\Debug\TodoDAL.pdb
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoDAL\obj\Debug\ResolveAssemblyReference.cache
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoDAL\obj\Debug\TodoDAL.dll
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoDAL\obj\Debug\TodoDAL.pdb

@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoManger", "TodoManger\TodoManger.csproj", "{51B7ECC9-A20F-4B3B-BB2B-FBCC798CC88D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8AA940D5-35ED-4C3A-8A34-2FDA9F23298B} = {8AA940D5-35ED-4C3A-8A34-2FDA9F23298B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoManger.Web", "TodoManger.Web\TodoManger.Web.csproj", "{8AA940D5-35ED-4C3A-8A34-2FDA9F23298B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMangerTest", "TodoMangerTest\TodoMangerTest.csproj", "{A009BB3B-2FCC-4836-A5B9-163EFA9BE39E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2FD3BC38-C403-4585-AE19-9813B760CFEC}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		TodoManger.vsmdi = TodoManger.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoDAL", "TodoDAL\TodoDAL.csproj", "{613A0DAD-7710-4D25-99F8-EFB60C9F5F73}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = TodoManger.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51B7ECC9-A20F-4B3B-BB2B-FBCC798CC88D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B7ECC9-A20F-4B3B-BB2B-FBCC798CC88D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B7ECC9-A20F-4B3B-BB2B-FBCC798CC88D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B7ECC9-A20F-4B3B-BB2B-FBCC798CC88D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AA940D5-35ED-4C3A-8A34-2FDA9F23298B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AA940D5-35ED-4C3A-8A34-2FDA9F23298B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AA940D5-35ED-4C3A-8A34-2FDA9F23298B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AA940D5-35ED-4C3A-8A34-2FDA9F23298B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A009BB3B-2FCC-4836-A5B9-163EFA9BE39E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A009BB3B-2FCC-4836-A5B9-163EFA9BE39E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A009BB3B-2FCC-4836-A5B9-163EFA9BE39E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A009BB3B-2FCC-4836-A5B9-163EFA9BE39E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{613A0DAD-7710-4D25-99F8-EFB60C9F5F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{613A0DAD-7710-4D25-99F8-EFB60C9F5F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{613A0DAD-7710-4D25-99F8-EFB60C9F5F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{613A0DAD-7710-4D25-99F8-EFB60C9F5F73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

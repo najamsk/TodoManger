@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Todo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="TodoStoreContainer">
+    <EntitySet Name="Tasks" EntityType="Todo.Store.Tasks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaskGroups" EntityType="Todo.Store.TaskGroups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="clients" EntityType="Todo.Store.clients" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TaskGroupTask" Association="Todo.Store.TaskGroupTask">
+      <End Role="TaskGroup" EntitySet="TaskGroups" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="clientTask" Association="Todo.Store.clientTask">
+      <End Role="client" EntitySet="clients" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TaskGroupId" Type="int" Nullable="false" />
+    <Property Name="clientId" Type="int" Nullable="false" />
+    <Property Name="DatePosted" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskGroups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DatePosted" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="clients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="pic" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="TaskGroupTask">
+    <End Role="TaskGroup" Type="Todo.Store.TaskGroups" Multiplicity="1" />
+    <End Role="Task" Type="Todo.Store.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="TaskGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="clientTask">
+    <End Role="client" Type="Todo.Store.clients" Multiplicity="1" />
+    <End Role="Task" Type="Todo.Store.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Todo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="TodoContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tasks" EntityType="Todo.Task" />
+          <EntitySet Name="TaskGroups" EntityType="Todo.TaskGroup" />
+          <EntitySet Name="clients" EntityType="Todo.client" />
+          <AssociationSet Name="TaskGroupTask" Association="Todo.TaskGroupTask">
+            <End Role="TaskGroup" EntitySet="TaskGroups" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="clientTask" Association="Todo.clientTask">
+            <End Role="client" EntitySet="clients" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="details" Nullable="false" />
+          <NavigationProperty Name="TaskGroup" Relationship="Todo.TaskGroupTask" FromRole="Task" ToRole="TaskGroup" />
+          <Property Type="Int32" Name="TaskGroupId" Nullable="false" />
+          <NavigationProperty Name="client" Relationship="Todo.clientTask" FromRole="Task" ToRole="client" />
+          <Property Type="Int32" Name="clientId" Nullable="false" />
+          <Property Type="DateTime" Name="DatePosted" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Tasks" Relationship="Todo.TaskGroupTask" FromRole="TaskGroup" ToRole="Task" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="DateTime" Name="DatePosted" Nullable="false" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="pic" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="Todo.clientTask" FromRole="client" ToRole="Task" />
+        </EntityType>
+        <Association Name="TaskGroupTask">
+          <End Type="Todo.TaskGroup" Role="TaskGroup" Multiplicity="1" />
+          <End Type="Todo.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="TaskGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="clientTask">
+          <End Type="Todo.client" Role="client" Multiplicity="1" />
+          <End Type="Todo.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TodoStoreContainer" CdmEntityContainer="TodoContainer">
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="IsTypeOf(Todo.Task)">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="details" ColumnName="details" />
+          <ScalarProperty Name="TaskGroupId" ColumnName="TaskGroupId" />
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskGroups">
+      <EntityTypeMapping TypeName="IsTypeOf(Todo.TaskGroup)">
+        <MappingFragment StoreEntitySet="TaskGroups">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clients">
+      <EntityTypeMapping TypeName="IsTypeOf(Todo.client)">
+        <MappingFragment StoreEntitySet="clients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="pic" ColumnName="pic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Todo" >
+        <EntityTypeShape EntityType="Todo.Task" Width="1.5" PointX="2.625" PointY="0.875" Height="2.3648893229166661" />
+        <EntityTypeShape EntityType="Todo.TaskGroup" Width="1.5" PointX="4.625" PointY="0.875" Height="1.787985026041667" />
+        <EntityTypeShape EntityType="Todo.client" Width="1.5" PointX="0.5" PointY="0.75" Height="1.787985026041667" />
+        <AssociationConnector Association="Todo.TaskGroupTask">
+          <ConnectorPoint PointX="4.625" PointY="1.7689925130208335" />
+          <ConnectorPoint PointX="4.125" PointY="1.7689925130208335" />
+        </AssociationConnector>
+        <AssociationConnector Association="Todo.clientTask">
+          <ConnectorPoint PointX="2" PointY="1.7064925130208335" />
+          <ConnectorPoint PointX="2.625" PointY="1.7064925130208335" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

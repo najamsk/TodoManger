@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Todo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="TodoStoreContainer">
+    <EntitySet Name="Tasks" EntityType="Todo.Store.Tasks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaskGroups" EntityType="Todo.Store.TaskGroups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="clients" EntityType="Todo.Store.clients" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TaskGroupTask" Association="Todo.Store.TaskGroupTask">
+      <End Role="TaskGroup" EntitySet="TaskGroups" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="clientTask" Association="Todo.Store.clientTask">
+      <End Role="client" EntitySet="clients" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TaskGroupId" Type="int" Nullable="false" />
+    <Property Name="clientId" Type="int" Nullable="false" />
+    <Property Name="DatePosted" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskGroups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DatePosted" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="clients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="pic" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="TaskGroupTask">
+    <End Role="TaskGroup" Type="Todo.Store.TaskGroups" Multiplicity="1" />
+    <End Role="Task" Type="Todo.Store.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="TaskGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="clientTask">
+    <End Role="client" Type="Todo.Store.clients" Multiplicity="1" />
+    <End Role="Task" Type="Todo.Store.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

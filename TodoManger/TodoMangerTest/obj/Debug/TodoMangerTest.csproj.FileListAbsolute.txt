@@ -1,0 +1,5 @@
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoMangerTest\bin\Debug\TodoMangerTest.dll
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoMangerTest\bin\Debug\TodoMangerTest.pdb
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoMangerTest\obj\Debug\ResolveAssemblyReference.cache
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoMangerTest\obj\Debug\TodoMangerTest.dll
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoMangerTest\obj\Debug\TodoMangerTest.pdb

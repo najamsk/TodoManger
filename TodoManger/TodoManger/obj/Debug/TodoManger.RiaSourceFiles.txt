@@ -1,0 +1,1 @@
+D:\Learning\TodoManager\TodoManger_Net\TodoManger\TodoManger.Web\TodoManger.Web.csproj,634216227415112348,Properties\AssemblyInfo.cs,

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Todo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="TodoContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tasks" EntityType="Todo.Task" />
+    <EntitySet Name="TaskGroups" EntityType="Todo.TaskGroup" />
+    <EntitySet Name="clients" EntityType="Todo.client" />
+    <AssociationSet Name="TaskGroupTask" Association="Todo.TaskGroupTask">
+      <End Role="TaskGroup" EntitySet="TaskGroups" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="clientTask" Association="Todo.clientTask">
+      <End Role="client" EntitySet="clients" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="details" Nullable="false" />
+    <NavigationProperty Name="TaskGroup" Relationship="Todo.TaskGroupTask" FromRole="Task" ToRole="TaskGroup" />
+    <Property Type="Int32" Name="TaskGroupId" Nullable="false" />
+    <NavigationProperty Name="client" Relationship="Todo.clientTask" FromRole="Task" ToRole="client" />
+    <Property Type="Int32" Name="clientId" Nullable="false" />
+    <Property Type="DateTime" Name="DatePosted" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Tasks" Relationship="Todo.TaskGroupTask" FromRole="TaskGroup" ToRole="Task" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="DateTime" Name="DatePosted" Nullable="false" />
+  </EntityType>
+  <EntityType Name="client">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="name" Nullable="false" />
+    <Property Type="String" Name="pic" Nullable="false" />
+    <NavigationProperty Name="Tasks" Relationship="Todo.clientTask" FromRole="client" ToRole="Task" />
+  </EntityType>
+  <Association Name="TaskGroupTask">
+    <End Type="Todo.TaskGroup" Role="TaskGroup" Multiplicity="1" />
+    <End Type="Todo.Task" Role="Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="TaskGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="clientTask">
+    <End Type="Todo.client" Role="client" Multiplicity="1" />
+    <End Type="Todo.Task" Role="Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
